@@ -2,7 +2,13 @@
 <img src="../master/Logo/Snooze_Logo.JPG">
 </p>
 
-# Snooze Obstructive Sleep Apnea Diagnostics System
+<p align="center"> 
+<h1>
+Snooze Obstructive Sleep Apnea Diagnostics System
+</h1>
+</p>
+
+
 
 ### Abstract
 Approximately 25 million adults in the United States of America
