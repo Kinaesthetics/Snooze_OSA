@@ -1,4 +1,4 @@
-# Snooze_OSA
+![Optional Text](../master/Logo/Snooze_Logo.png)
 
 ### Abstract
 Approximately 25 million adults in the United States of America
