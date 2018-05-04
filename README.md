@@ -22,7 +22,7 @@ OSA diagnosis.
 
 
 
-------
+## Equipment Inventory
 #### Sensor Systems
 ------
 * 1 x Temperature Sensor System
@@ -34,14 +34,12 @@ OSA diagnosis.
 *	1 x Airflow Microphone Sensor System
     *	500mAH battery w/ USB charging adapter
     
-------
 #### Smartphone Application Systems
 ------
 *	1 x Android Smartphone
     *	USB charging adapter (micro/mini/type-C)
     *	Snooze Application Installed.
 
-------
 #### Cloud Systems
 ------
 *	1 x AWS S3 Instance (running)
