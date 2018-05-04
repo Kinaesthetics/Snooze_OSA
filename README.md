@@ -1,6 +1,7 @@
 <p align="center"> 
 <img src="../master/Logo/Snooze_Logo.JPG">
 </p>
+
 # Snooze Obstructive Sleep Apnea Diagnostics System
 
 ### Abstract
