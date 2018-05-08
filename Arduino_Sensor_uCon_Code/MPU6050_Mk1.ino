@@ -236,10 +236,11 @@ void loop() {
             if(printFlag == true)
             {
               Serial.print(ypr[0] * 180/M_PI);
-              Serial.print("\t");
+              Serial.print(" ");
               Serial.print(ypr[1] * 180/M_PI);
-              Serial.print("\t");
-              Serial.println(ypr[2] * 180/M_PI);
+              Serial.print(" ");
+              Serial.print(ypr[2] * 180/M_PI);
+              Serial.print(" ;");
               
               startMillis = millis();
               printFlag = false;
