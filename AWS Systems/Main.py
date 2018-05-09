@@ -34,20 +34,17 @@ from boto.s3.connection import S3Connection
 channel_info = []
 data_list = []
 
-#Download all data into a local library
-LOCAL_PATH = 'RawData/'
 #Creditonals 
-AWS_ACCESS_KEY_ID = 'XXXXXXXXXXXXXXXXXX'
-AWS_SECRET_ACCESS_KEY = 'XXXXXXXXXXXXXXXXXX'
+AWS_ACCESS_KEY_ID = 'XXXXXXXXXXXXXXXXXXXX'
+AWS_SECRET_ACCESS_KEY = 'XXXXXXXXXXXXXXXXXXXX'
 #Bucket Name
-#bucket_name = 'snooze2'
-bucket_name = 'XXXXXXXXXXXXXXXXXX'
+bucket_name = 'XXXXXXXXXXXXXXXXXXXX'
 merger = PdfFileMerger()
 # connect to the bucket
 conn = boto.connect_s3(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
 #Connect to dataebase
-dynamodb = boto3.resource('dynamodb',region_name='us-east-1')
-table = dynamodb.Table('XXXXXXXXXXXXXXXXXX')
+dynamodb = boto3.resource('dynamodb',region_name='XXXXXXXXXXXXXXXXXXXX')
+table = dynamodb.Table('XXXXXXXXXXXXXXXXXXXX')
 #Connection to bucket
 bucket = conn.get_bucket(bucket_name)
 #Current Date and time
@@ -56,7 +53,7 @@ now = datetime.datetime.now()
 s3client = boto3.client("s3")
 s3 = boto3.resource('s3')
 # download file into current directory
-BUCKET_NAME = 'tXXXXXXXXXXXXXXXXXX'
+BUCKET_NAME = 'XXXXXXXXXXXXXXXXXXXX'
 #for file in files:
 try:
     s3.Bucket(BUCKET_NAME).download_file('PATH/TO/FILE', 'FILE')
@@ -105,17 +102,17 @@ for filename in glob.glob('FILE'):
            #Save Graph onto PDF file Header
            head=list(islice(meta,3))
            #Starts data results
-           c.drawString(10,780,str(head))
-           c.setFont("Times-Roman",10)
-           c.drawString(10,765,'Patient ID:__________')
-           c.drawString(125,765,'Date of Birth:___/___/______')
-           c.drawString(10,750,'Address:___________________________________Zip:_________City:__________')
-           c.drawString(250,765,'Height:________Weight:________')
-           c.drawString(375,750,'Phone Number:____-____-________  Age:____')
-           c.line(0,730,1000,730)
+           c.drawString(10,780,str(head)+'  Duration: '+str(df['Time'].max()))
+           c.setFont("Times-Roman",12)
+           c.drawString(10,764,'Patient ID:__________')
+           c.drawString(125,764,'Date of Birth:___/___/______')
+           c.drawString(10,749,'Address:___________________________________Zip:_________City:__________')
+           c.drawString(275,764,'Height:________Weight:________  Age:____')
+           c.drawString(425,749,'Phone Number:____-____-________')
+           c.line(0,730,1000,729)
            c.setFont("Times-Roman" ,20)
            c.drawString(10,715,'Body Temperature')
-           c.setFont("Times-Roman",9)
+           c.setFont("Times-Roman",10)
            c.drawString(10,700,'Max Temperature: '+str(df['Temp'].max()))
            c.drawString(10,685,'Min Temperature: '+str(df['Temp'].min()))
            c.drawString(10,670,'Average Temperature: '+str(df['Temp'].median()))
@@ -124,7 +121,7 @@ for filename in glob.glob('FILE'):
            c.line(0,650,1000,650)
            c.setFont("Times-Roman" ,20)
            c.drawString(10,635,'Pulse')
-           c.setFont("Times-Roman",9)
+           c.setFont("Times-Roman",10)
            c.drawString(10,620,'Max Heart Beat: '+str(df['Heart'].max()))
            c.drawString(10,605,'Min Heart Beat: '+str(df['Heart'].min()))
            c.drawString(10,590,'Average Heart Beat: '+str(df['Heart'].median()))
@@ -133,7 +130,7 @@ for filename in glob.glob('FILE'):
            c.line(0,575,1000,575)
            c.setFont("Times-Roman" ,20)
            c.drawString(10,560,'Oxygen Saturation (Sp02)')
-           c.setFont("Times-Roman",9)
+           c.setFont("Times-Roman",10)
            c.drawString(10,545,'Max Oxygen Rate: '+str(df['Oxy'].max()))
            c.drawString(10,530,'Min Oxygen Rate: '+str(df['Oxy'].min()))
            c.drawString(150,545,'Time it hit above 700: '+str((df['Oxy'] >= 700).values.sum()))
@@ -142,11 +139,20 @@ for filename in glob.glob('FILE'):
            c.line(0,500,1000,500)
            c.setFont("Times-Roman" ,20)
            c.drawString(10,485,'Body Position')
-           c.setFont("Times-Roman",9)
-           c.drawString(10,460,'Back: ')
-           c.drawString(10,445,'Front: ')
-           c.drawString(10,430,'Left Side: ')
-           c.drawString(10,415,'Right Side: ')
+           c.setFont("Times-Roman",10)
+           c.drawString(10,470,'Total Time of each position ')
+           back_time=((-20<df['Y']) & (df['Y']<20)).values.sum()
+           back_time=back_time%60
+           front_time=((-60>df['Y']) | (df['Y']>60)).values.sum()
+           front_time=back_time%60
+           left_time=((-60<df['Y']) & (df['Y']<-20)).values.sum()
+           left_time=back_time%60
+           right_time=((20<df['Y']) & (df['Y']<60)).values.sum()
+           right_time=back_time%60
+           c.drawString(10,455,'Back: '+str(((-20<df['Y']) & (df['Y']<20)).values.sum())+'s')
+           c.drawString(10,440,'Front: '+str(((-60>df['Y']) | (df['Y']>60)).values.sum())+'s')
+           c.drawString(10,425,'Left Side: '+str(((-60<df['Y']) & (df['Y']-20)).values.sum())+'s')
+           c.drawString(10,410,'Right Side: '+str(((20<df['Y']) & (df['Y']<60)).values.sum())+'s')
            #Saves all the data into the PDF document
            c.save()
            pdf.savefig(fig1)
@@ -220,5 +226,5 @@ for filename in glob.glob('FILE'):
     os.remove(filename[:10]+'.edf')
     os.remove(filename[:10]+'S.pdf')
     #Delete anything downloaded from S3 recently
-    os.remove(key.name)
+    os.remove(filename)
  
