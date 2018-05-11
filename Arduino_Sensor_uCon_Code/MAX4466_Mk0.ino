@@ -1,6 +1,10 @@
 /****************************************
-Example Sound Level Sketch for the 
+Sound Level Sketch for the 
 Adafruit Microphone Amplifier
+
+based on code from Adafruit
+https://learn.adafruit.com/adafruit-microphone-amplifier-breakout/measuring-sound-levels
+
 ****************************************/
  
 const int sampleWindow = 1000; // Sample window width in mS

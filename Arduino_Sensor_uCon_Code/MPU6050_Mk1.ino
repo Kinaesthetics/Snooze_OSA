@@ -1,7 +1,12 @@
+// Based on
 // I2C device class (I2Cdev) demonstration Arduino sketch for MPU6050 class 
 // using DMP (MotionApps v2.0)
 // 6/21/2012 by Jeff Rowberg <jeff@rowberg.net>
-//Modified by Andrew Asdel 5/3/2018
+// https://github.com/jrowberg/i2cdevlib/tree/master/Arduino/MPU6050
+// with help from reference guide 
+//https://www.i2cdevlib.com/docs/html/class_m_p_u6050.html
+//
+// Modified by Andrew Asdel 5/9/2018
 
 /* ============================================
 I2Cdev device library code is placed under the MIT license
