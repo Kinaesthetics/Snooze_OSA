@@ -4,7 +4,7 @@
 
 <p align="center"> 
 <h1>
-Snooze Obstructive Sleep Apnea Diagnostics System
+Snooze: An Obstructive Sleep Apnea Diagnostics System
 </h1>
 </p>
 
